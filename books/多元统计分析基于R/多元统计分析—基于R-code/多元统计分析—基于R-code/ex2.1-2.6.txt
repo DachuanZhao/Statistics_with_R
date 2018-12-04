@@ -1,0 +1,52 @@
+#习题2.1
+#打开数据文件ex2.1.xls,选取B1:F28区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.1.xls数据读入到dat中
+lm2.1<-lm(y~x1+x2+x3+x4,data=dat)  #建立y关于x1、x2、x3和x4的线性回归方程,数据为dat
+summary(lm2.1)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.1,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+#习题2.2
+#打开数据文件ex2.2.xls,选取B1:F32区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.2.xls数据读入到dat中
+lm2.2<-lm(y~x1+x2+x3+x4,data=dat)  #建立y关于x1、x2、x3和x4的线性回归方程,数据为dat
+summary(lm2.2)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.2,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+#习题2.3
+#打开数据文件ex2.3.xls,选取B1:G17区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.3.xls数据读入到dat中
+lm2.3<-lm(y~x1+x2+x3+x4+x5,data=dat)  #建立y关于x1、x2、x3、x4和x5的线性回归方程,数据为dat
+summary(lm2.3)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.3,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+#习题2.4
+#打开数据文件ex2.4.xls,选取B1:F51区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.4.xls数据读入到dat中
+lm2.4<-lm(y~x1+x2+x3+x4,data=dat)  #建立y关于x1、x2、x3和x4的线性回归方程,数据为dat
+summary(lm2.4)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.4,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+#习题2.5
+#打开数据文件ex2.5.xls,选取B1:H29区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.5.xls数据读入到dat中
+lm2.5<-lm(y~x1+x2+x3+x4+x5+x6,data=dat)  #建立y关于x1、x2、x3、x4、x5和x6的线性回归方程,数据为dat
+summary(lm2.5)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.5,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+#习题2.6
+#打开数据文件ex2.6.xls,选取B1:G29区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex2.6.xls数据读入到dat中
+lm2.6<-lm(y~x1+x2+x3+x4+x5,data=dat)  #建立y关于x1、x2、x3、x4和x5的线性回归方程,数据为dat
+summary(lm2.6)   #模型汇总,给出模型回归系数的估计和显著性检验等
+lm.step<-step(lm2.6,direction="both") #用“一切子集回归法”来进行逐步回归
+summary(lm.step) #模型汇总,给出模型回归系数的估计和显著性检验等
+
+
+
+
+

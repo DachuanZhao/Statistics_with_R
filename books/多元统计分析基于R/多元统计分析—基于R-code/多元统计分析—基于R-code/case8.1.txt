@@ -1,0 +1,10 @@
+#案例8.1
+#打开数据文件case8.1.xls,选取A1:H8区域,然后复制
+X<-read.table("clipboard",header=T) #将case8.1.xls数据读入到X中
+Z=X[,-1] #第一列为样本名称，不宜代入做分析，故将X提取除第一列以外的元素并命名为Z
+chisq.test(Z)  #卡方检验
+library(MASS)  #加载MASS程序包
+ca2=corresp(Z,nf=2)  #进行对应分析，取2个因子
+rownames(ca2$rscore)=X[,1]  #将ca2$rscore的行命名为X的第一列样本名称
+ca2  #显示ca2的基本信息
+biplot(ca2,cex=0.55);abline(v=0,h=0,lty=3) #做对应分析图，并分好象限

@@ -1,0 +1,10 @@
+Freq shop age
+83 A A
+91 A B
+41 A C
+70 B A
+86 B B
+38 B C
+45 C A
+15 C B
+10 C C

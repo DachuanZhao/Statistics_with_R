@@ -1,0 +1,48 @@
+#案例5.1  距离判别法、Fisher判别法和Bayes判别分析法的比较
+#  A. 距离判别法
+#打开数据文件case5.1.xls,选取D1:H31区域,然后复制
+case5.1=read.table("clipboard", header=T)  #将已复制到剪贴板中的数据读入R
+attach(case5.1)   #把数据变量列名放入内存
+classG1= case5.1 [1:11,2:5]   #选取训练样本1
+classG2= case5.1 [12:27,2:5]  #选取训练样本2
+newdata= case5.1 [28:30,2:5]  #选取待测样本用于后面判定
+source("DDA2.R")    #载入自编程序DDA2.R,假设它已放在当前工作目录中
+DDA2(classG1,classG2)    #执行程序DDA2.R
+DDA2(classG1, classG2, newdata)  #对待判样本newdata进行判定
+
+#  B. Fisher判别法
+#打开数据文件case5.1.xls,选取D1:H28区域,然后复制
+case5.1=read.table("clipboard", header=T)  #将已复制到剪贴板中的数据读入R
+attach(case5.1)   #把数据变量列名放入内存
+library(MASS)     #加载MASS程序包
+ld=lda(G~x1+x2+x3+x4)  #用线性判别函数lda( )作判别分析
+ld  #输出判别结果
+Z=predict(ld)  #用函数predict( )对原始数据进行回判分类
+newG=Z$class  #单独列出回判分类
+cbind(G, newG, Z$x)  #对比原始数据分类、回判分类结果和判别函数的值
+tab=table(G, newG)  #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率
+#再对三个待判样本进行判定:打开数据文件case5.1.xls,选取D1:H31区域,然后复制
+case5.1=read.table("clipboard", header=T) #将已复制到剪贴板中的数据读入R
+newdata=case5.1[28:30, 2:5]    #选取待测样本用于下面判别
+predict(ld, newdata= newdata)   #对待测样本进行判别，输出判别结果
+
+#  C. Bayes判别法
+#和Fisher判别法类似，打开数据文件case5.1.xls,选取D1:H28区域,然后复制
+case5.1=read.table("clipboard", header=T)  #将已复制到剪贴板中的数据读入R
+attach(case5.1)   #把数据变量列名放入内存
+library(MASS)     #加载MASS程序包
+ld=lda(G~x1+x2+x3+x4, prior = c(11/27, 16/27))  #用先验概率进行线性判别
+ld  #输出判别结果
+Z=predict(ld)  #用函数predict( )对原始数据进行回判分类
+newG=Z$class  #单独列出回判分类
+cbind(G, newG, Z$x)  #对比原始数据分类、回判分类结果和判别函数的值
+tab=table(G, newG)  #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率
+#判别结果和距离判别法与Fisher判别法一致
+#再对三个待判样本进行判定:打开数据文件case5.1.xls,选取D1:H31区域,然后复制
+case5.1=read.table("clipboard", header=T) #将已复制到剪贴板中的数据读入R
+newdata=case5.1[28:30, 2:5]    #选取待测样本用于下面判别
+predict(ld, newdata= newdata)   #对待测样本进行判别，输出判别结果

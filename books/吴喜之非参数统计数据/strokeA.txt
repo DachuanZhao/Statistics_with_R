@@ -1,0 +1,5 @@
+Freq Now Before
+35 Y Y
+25 N Y
+15 Y N
+38 N N

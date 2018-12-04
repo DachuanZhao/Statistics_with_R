@@ -1,0 +1,199 @@
+1+2^3-sin(5)*2*pi
+n=1200;x=runif(n*10)
+x=matrix(x,n,10)
+x1=(x[,1:5]<.4)*1
+p=x1*.8+(1-x1)*.2
+x2=1*(x[,6:10]<p)
+z=cbind(x1,x2)
+z = rnorm(1000,4,0.1) 
+median(z) 
+z=seq(-1,10,length=100); z 
+z=seq(-1,10, len=100); 
+z=seq(10,-1,-1); z 
+z=10:-1; z  
+x=rep(3,1:3); x
+x=rep(3:5,1:3); x
+x=rep(c(1,10),c(4,5)); x
+w=c(1,3,x,z);w[3]
+pnorm(1.2,2,1);dnorm(1.2,2,1); qnorm(.7,2,1);rnorm(10,0,1); rnorm(10)
+x=rep(0,10);z=1:3;x+z
+x*z
+rev(x)
+z=c("no cat","has ","nine","tails")
+z[1]=="no cat"
+x=1:3;names(x)=LETTERS[1:3];x
+append(x,runif(3),after=2)
+z=1:5
+z[7]=8;z
+z=NULL
+z[c(1,3,5)]=1:3; z
+rnorm(10)[c(2,5)]
+z[-c(1,3)]
+z[(length(z)-4):length(z)] 
+z=sample(1:100,10);z
+order(z)
+z[order(z)]
+sort(z)
+which(z==max(z))
+x=matrix(runif(20),4,5);x
+x=matrix(1:20,4,5);x
+x=matrix(1:20,4,5,byrow=T);x
+nrow(x); ncol(x);dim(x)
+x=matrix(rnorm(24),4,6)
+x[c(2,1),]
+x[,c(1,3)]
+x[2,1]
+x[x[,1]>0,1]
+sum(x[,1]>0)
+sum(x[,1]<=0)
+x[,-c(1,3)] 
+x[-2,-c(1,3)]
+x[x[,1]>0&x[,3]<=1,1]
+x[x[,2]>0|x[,1]<.51,1]
+x[!x[,2]<.51,1]
+x=rnorm(10)
+all(x>0);all(x!=0);any(x>0);(1:10)[x>0]
+x=sample(1:7,5,rep=T);unique(x)
+x=matrix(runif(9),3,3);x
+t(x)
+solve(x)  
+x%*%solve(x)
+x=array(runif(20),c(4,5)); x
+is.matrix(x)
+x[1,2]
+x[1,]
+x[,2]
+dim(x)
+x=array(runif(24),c(4,3,2))
+is.matrix(x);x
+x=array(1:24,c(4,3,2))
+x[c(1,3),,]
+x=matrix(1:30,5,6);y=matrix(rnorm(20),4,5)
+y%*%x 
+apply(x,1,mean)
+apply(x,2,sum)
+apply(x,2,prod)
+x=array(1:24,c(4,3,2))
+apply(x,1,mean)
+apply(x,1:2,sum)
+apply(x,c(1,3),prod)
+x=array(1:24,c(4,3,2))
+apply(x,1,mean)
+apply(x,1:2,sum)
+apply(x,c(1,3),prod)
+z=array(1:24,c(2,3,4))
+sweep(z,1,1:2,"-")
+sweep(z,c(1,2),matrix(1:6,2,3),"-")
+outer(1:2,rep(1,2))
+outer(1:2,matrix(rep(1,6),3,2))
+z=list(1:3,Tom=c(1:2, a=list("R",letters[1:5]),w="hi!"))
+z[[1]];z[[2]];z$T;z$T$a2;z$T[[3]];z$T$w
+attributes(z)
+attributes(matrix(1:6,2,3))
+x=matrix(1:12,nrow=3,dimnames=list(c("I","II","III"),paste("X",1:4,sep="")))
+y=array(1:12,c(3,2,2),dimnames=list(c("I","II","III"),
+    paste("X",1:2 sep=""),paste("Y",1:2, sep="")))
+x=matrix(1:6,2,3)
+x=as.data.frame(x);x
+x$V2
+x$V2
+attributes(x)
+names(x)=c("TOYOTA","GM","HUNDA")
+row.names(x)=c("2001","2002");x
+x=c(1,2,7,8);x
+x=scan()
+1 2 7 8 #("enter" twice to end typing in data)
+fix(x)
+x=c("Yes","No","No","Yes","Yes")
+table(x);x
+factor(x)
+beer = scan() 
+3 4 1 1 3 4 3 3 1 3 2 1 2 1 2 3 2 3 1 1 1 1 4 3 1 #type "enter" twice
+barplot(beer) # this isn't correct
+barplot(table(beer)) 
+barplot(table(beer)/length(beer)) 
+sals = scan() 
+12 .4 5 2 50 8 3 1 4 0.25 #type "enter" twice
+mean(sals);var(sals);sd(sals) ;median(sals)
+fivenum(sals)
+summary(sals) 
+sort(sals); fivenum(sals);summary(sals)
+mean(sals,trim=1/10) ;mean(sals,trim=2/10)
+mad(sals)
+median(abs(sals - median(sals)))
+median(abs(sals - median(sals)))*1.4826
+x=scan()
+29.6 28.2 19.6 13.7 13.0 7.8 3.4 2.0 1.9 1.0 0.7 0.4 
+0.4 0.3 0.3 0.3 0.3 0.3 0.2 0.2 0.2 0.1 0.1 0.1 0.1 0.1
+hist(x) # frequencies
+hist(x,probability=TRUE) # proportions (or probabilities)
+rug(jitter(x)) # add tick marks
+hist(x,breaks=10) # 10 breaks, or just hist(x,10)
+hist(x,breaks=c(0,1,2,3,4,5,10,20,max(x))) # breaks
+x = c(.314,.289,.282,.279,.275,.267,.266,.265,.256,.250,.249,.211,.161)
+tmp = hist(x) # store the results
+lines(c(min(tmp$breaks),tmp$mids,max(tmp$breaks)),c(0,tmp$counts,0),type="l")
+data(faithful) 
+attach(faithful) # make eruptions visible
+hist(eruptions,15,prob=T) # proportions, not frequencies
+lines(density(eruptions)) # lines makes a curve, default bandwidth
+smokes = c("Y","N","N","Y","N","Y","Y","Y","N","Y")
+amount = c(1,2,2,3,3,1,2,1,3,2)
+table(smokes,amount)
+tmp=table(smokes,amount) # store the table
+options(digits=3) # only print 3 decimal places
+prop.table(tmp,1) # the rows sum to 1 now
+prop.table(tmp,2) 
+prop.table(tmp)#amount # all the numbers sum to 1
+options(digits=7) # restore the number of digits
+barplot(table(smokes,amount))
+barplot(table(amount,smokes))
+smokes=factor(smokes) # for names
+barplot(table(smokes,amount), beside=TRUE, legend.text=T)
+barplot(table(amount,smokes),main="table(amount,smokes)", 
+    beside=TRUE, legend.text=c("less than 5","5-10","more than 10"))
+x = c(5, 5, 5, 13, 7, 11, 11, 9, 8, 9)
+y = c(11, 8, 4, 5, 9, 5, 10, 5, 4, 10)
+boxplot(x,y);amount = scan()
+5 5 5 13 7 11 11 9 8 9 11 8 4 5 9 5 10 5 4 10
+category = scan()
+1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
+boxplot(amount ~ category) # note the tilde ~ 
+x=0:18
+plot(x,x,pch=x,col=x)
+points(x,18-x,pch=x)
+matplot(x,cbind(x,18-x))
+spring= data.frame(compression=c(41,39,43,53,42,48,47,46),
+    distance=c(120,114,132,157,122,144,137,141))
+attach(spring)
+(Hooke¡¯s law: f=.5ks)
+plot(distance ~ compression)
+plot(compression, distance)
+par(mfrow=c(2,2))
+plot(compression, distance,main= "Hooke's Law")
+plot(compression, distance,main= "Hooke's Law", xlab= "x",ylab= "y") 
+identify(compression,distance) 
+plot(compression, distance,main="Hooke's Law")
+text(46,120, "f=1/2*k*s")
+plot(compression, distance,main="Hooke's Law") 
+text(locator(2), "I am here!")
+library(mass);data(Animals);attach(Animals)
+plot(body, brain)
+plot(sqrt(body), sqrt(brain))
+plot((body)^0.1, (brain)^0.1)
+plot(log(body),log(brain)) 
+Expo=function(y,x=2){z=y^x;z}
+y=seq(0,1,length=100);plot(y,Expo(y),type="l") 
+view.colours = function(){
+plot(1, 1, xlim=c(0,14), ylim=c(0,3), type="n", axes=F, xlab="",ylab="")
+text(1:6, rep(2.5,6), paste(1:6), col=palette()[1:6], cex=2.5)
+text(10, 2.5, "Default palette", adj=0)
+rainchars = c("R","O","Y","G","B","I","V")
+text(1:7, rep(1.5,7), rainchars, col=rainbow(7), cex=2.5)
+text(10, 1.5, "rainbow(7)", adj=0)
+cmtxt = substring("cm.colors", 1:9,1:9)
+# Split "cm.colors" into its 9 characters
+text(1:9, rep(0.5,9), cmtxt, col=cm.colors(9), cex=3)
+text(10, 0.5, "cm.colors(9)", adj=0)
+}
+view.colours()

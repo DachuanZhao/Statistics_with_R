@@ -1,0 +1,4 @@
+#case4.1,打开数据文件case4.1.xls,选取B3:J149区域,然后复制
+dat<-read.table("clipboard",header=T) #将case4.1.xls数据读入到dat中
+KM<-kmeans(dat,4,nstart=20,algorithm="Hartigan-Wong") #聚为4类
+sort(KM$cluster) #对分类结果进行排序并查看分类情况

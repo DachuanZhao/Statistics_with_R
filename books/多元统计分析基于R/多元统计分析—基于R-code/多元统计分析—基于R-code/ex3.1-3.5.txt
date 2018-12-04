@@ -1,0 +1,35 @@
+#ex3.1广义线性模型:logistic模型
+#打开数据文件ex3.1.xls,选取A1:C181区域,然后复制
+data3.1<-read.table("clipboard",header=T) #将ex3.1.xls数据读入到data3.1中
+glm.logit<-glm(y~x,family=binomial,data=data3.1)  #建立y关于x的logistic回归模型,数据为data3.1
+summary(glm.logit)  #模型汇总,给出模型回归系数的估计和显著性检验等
+yp<-predict(glm.logit,data.frame(x=30)) 
+p.fit<-exp(yp)/(1+exp(yp));p.fit  #估计x=30时y=1的概率
+
+#ex3.2广义线性模型:logistic模型
+#打开数据文件ex3.2.xls,选取A1:C201区域,然后复制
+data3.2<-read.table("clipboard",header=T) #将ex3.2.xls数据读入到data3.2中
+glm.logit<-glm(opinion~age+sex,family=binomial,data=data3.2)  #建立opinion关于age,sex的logistic回归模型,数据为data3.2
+summary(glm.logit)  #模型汇总,给出模型回归系数的估计和显著性检验等
+yp<-predict(glm.logit,data.frame(age=30,sex=0)) 
+p.fit<-exp(yp)/(1+exp(yp));p.fit  #估计age=30,sex=0时opinion=1的概率
+
+#ex3.3 广义线性模型: 泊松对数线性模型
+#打开数据文件ex3.3.xls,选取A1:C7区域,然后复制
+data3.3<-read.table("clipboard",header=T) #将ex3.3.xls数据读入到data3.3中
+glm.ln<-glm(y~x1+x2,family=poisson(link=log),data=data3.3)  #建立y关于x1,x2的泊松对数线性模型
+summary(glm.ln)  #模型汇总,给出模型回归系数的估计和显著性检验等
+exp(coef(glm.ln)) #指数化系数
+
+#ex3.4 广义线性模型: 泊松对数线性模型
+#打开数据文件ex3.4.xls,选取A1:D61区域,然后复制
+data3.4<-read.table("clipboard",header=T) #将ex3.4.xls数据读入到data3.4中
+glm.ln<-glm(y~x1+x2,family=poisson(link=log),data=data3.4)  #建立y关于x1,x2的泊松对数线性模型
+summary(glm.ln)  #模型汇总,给出模型回归系数的估计和显著性检验等
+exp(coef(glm.ln)) #指数化系数
+
+#ex3.5广义线性模型:logistic模型
+#打开数据文件ex3.5.xls,选取A1:D401区域,然后复制
+data3.5<-read.table("clipboard",header=T) #将ex3.5.xls数据读入到data3.5中
+glm.logit<-glm(admit~gre+gpa+rank,family=binomial,data=data3.5)  #建立admit关于gre、gpa和rank的logistic回归模型,数据为data3.5
+summary(glm.logit)  #模型汇总,给出模型回归系数的估计和显著性检验等

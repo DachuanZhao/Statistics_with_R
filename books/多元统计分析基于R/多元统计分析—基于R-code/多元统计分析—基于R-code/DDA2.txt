@@ -1,0 +1,18 @@
+ DDA2<-function (TrnG1, TrnG2, TstG = NULL, var.equal = FALSE){
+    if (is.null(TstG) == TRUE) TstG<-rbind(TrnG1,TrnG2)
+    if (is.vector(TstG) == TRUE)  TstG<-t(as.matrix(TstG)) else if (is.matrix(TstG) != TRUE)
+　      TstG<-as.matrix(TstG)
+    if (is.matrix(TrnG1) != TRUE) TrnG1<-as.matrix(TrnG1)
+    if (is.matrix(TrnG2) != TRUE) TrnG2<-as.matrix(TrnG2); 
+    nx<-nrow(TstG)
+    blong<-matrix(rep(0, nx), nrow=1, byrow=TRUE, dimnames=list("blong", 1:nx))
+    mu1<-colMeans(TrnG1); mu2<-colMeans(TrnG2) 
+    if (var.equal == TRUE  || var.equal == T){
+        S<-var(rbind(TrnG1,TrnG2))
+　      w<-mahalanobis(TstG, mu2, S)-mahalanobis(TstG, mu1, S)
+        } else{
+        S1<-var(TrnG1); S2<-var(TrnG2)
+　      w<-mahalanobis(TstG, mu2, S2)-mahalanobis(TstG, mu1, S1)
+        }
+　   for (i in 1:nx){if (w[i]>0) blong[i]<-1 else blong[i]<-2}; blong
+}

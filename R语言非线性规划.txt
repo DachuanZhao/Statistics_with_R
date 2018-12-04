@@ -1,0 +1,57 @@
+鉴于该包为默认安装包，大多数人比较熟悉，下面着重探讨专门解决非线性优化的 Rdonlp2 包的用法。
+R中，Rdonlp2包是一个非常强大的包，可以方便快速地解决光滑的非线性规划问题。核心函数为 donlp2()，可以求连续非线性函数的最值 (默认求最小值) ，用法如下：
+donlp2(par,fn,
+par.upper=rep(+Inf,length(par)),
+par.lower=rep(-Inf,length(par)),
+A=NULL,
+lin.upper=rep(+Inf,length(par)),
+lin.lower=rep(-Inf,length(par)),
+nlin =list(),
+nlin.upper=rep(+Inf,length(nlin)),
+nlin.lower=rep(-Inf,length(nlin)),
+control=donlp2.control(),
+control.fun=function(lst){return(TRUE)},
+env=.GlobalEnv,
+name="Rdonlp2")
+1. 初始值、目标函数及自变量定义域：
+par向量，迭代初始值。
+fn连续型函数，函数自变量限制为 1 个 (自变量一般为向量，这样可以包含多个参数)，函数的
+返回值为优化目标。
+par.upper和par.lower向量，分别为自变量的上下界限，即模型(4)中的xu和 xl，它们的长度应该和向量 par 相等。如果变量无界，必须用正无穷 (+Inf) 和负无穷大 (-Inf) 来表示。可以看出，自变量默认无界，可以取全体实数。
+2. 线性约束：
+A线性约束矩阵，即模型 (4) 中的矩阵 A，其列的长度必须和向量 par 相等 (即总变量个数)，
+其行的长度必须和线性约束的个数相等。
+lin.upper和lin.lower向量，分别为线性约束条件的上下界限，即模型(4)中bu和bl，它们的长度应该和线性约束的个数相等。如果某个线性约束无界，必须用正无穷(+Inf) 或负无穷大 (-Inf) 来表示。如果某一个线性约束取固定值，那么只要设置它在lin.upper 和 lin.lower 两个向量中对应位置都为该固定值即可(如 ax1+ bx2= k，可化为 k≤ax1+ bx2≥k，即上下界都为 k)，这方法同样适合于下面要说的非线性约束条件的控制。
+3. 非线性约束：
+lin列表，其中的元素为表示非线性约束条件的函数。
+nlin.upper和 nlin.lower向量，分别为非线性约束条件的上下界限，即模型 (4) 中的 cu和cl，它们的长度应该和非线性约束的个数相等。如果某个非线性约束无界，必须用正无穷(+Inf) 或负无穷大 (-Inf) 来表示。
+4. 控制参数：
+control控制参数，为donlp2.control()，可以修改一些关于算法的参数和输出参数，可以根据
+实际要求修改。
+control.fun控制函数。
+env运行环境，一般不需要更改。
+name字符变量，如果不是默认值，则会在程序运行时在工作目录生成两个以 name 为主文件名，后缀分别为 pro、mes 的文件，其中 name.pro 文件为优化问题运行结果，name.mes文件为警告及其它信息。
+例求下列有约束的非线性规划问题。
+解：这是一个非线性规划问题。R 代码如下:
+>library(Rdonlp2)
+>p=c(10,10)
+>par.l=c(-100,-100);par.u=c(100,100)
+>fn=function(x){
++ x[1]^2*sin(x[2])+x[2]^2*cos(x[1])
++}
+>A=matrix(c(1,1,3,-1),2,byrow=TRUE)
+>lin.l=c(2,1);lin.u=c(+Inf,3)
+>nlconl=function(x){
++x[1]*x[2]
++}
+>nlcon2=function(x){
++sin(x[1])*cos(x[2])
++}
+>nlin.l=c(2,-Inf)
+>nlin.u=c(2,0.6)
+>ret=donlp2(p,fn,par.u=par.u,par.l=par.l,A,lin.l=lin.l,lin.u=lin.u,nlin=list(nlconl,nlcon2),nlin.u=nlin.u,nlin.l=nlin.l)
+KT-conditionssatisfied, no further correction computed
+optimal value of f =2.28705347564892e+00
+optimal solution x =
+1.40307592849219e+001.42543960692795e+00
+其中第 1 行表示求解成功，第 2 行表示此时目标函数最小值为 2.287(保留三位小数，后面也是如此)，3 - 4 行表示 x，y 分别为 1.403，1.425。

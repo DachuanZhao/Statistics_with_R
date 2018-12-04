@@ -1,0 +1,45 @@
+#例5.1  判别昆虫性别
+#先编写协方差阵相等时的判别函数
+W2equal=function(x, mu1, mu2, S){(mahalanobis(x,mu2, S)-mahalanobis(x,mu1, S))/2}
+mu1=c(6, 5); mu2=c(8, 6); S=matrix(c(9, 2, 2, 4),nrow=2)#输入两个均值和共同的协方差阵 
+x=c(7.2, 5.6)
+W2equal(x, mu1, mu2, S)  #将x代入进行判断，值为负，判断该虫为雄虫
+x=c(6.3, 4.9)
+W2equal(x, mu1, mu2, S)  #将x代入进行判断，值为正，判断该虫为雌虫
+#再编写协方差阵不相等时的判别函数
+W2unequal=function(x, mu1, mu2, S1, S2){mahalanobis(x, mu2, S2)-mahalanobis(x, mu1, S1)}
+mu1=c(6, 5); mu2=c(8, 6); S1=matrix(c(9, 2, 2, 4), nrow=2); S2=matrix(c(6, 2, 2, 3), nrow=2)
+#输入两个不同的均值和不同的的协方差阵
+x=c(7.2, 5.6)
+W2unequal(x, mu1, mu2, S1, S2)  #将x代入进行判断，值为负，仍判断该虫为雄虫
+
+#例5.2  对鸢尾花(iris)数据的判别分析
+data(iris)  #先读取iris数据
+iris  #显示iris数据
+attach(iris)  #把数据变量的名字放入内存，这样能通过列名直接使用各列数据
+library(MASS)  #加载MASS程序包，这是必须的，否则找不到lda( )函数
+ld=lda(Species~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width)
+#用线性判别函数lda( )作判别分析
+#也可以用命令 iris.lda=lda(iris[,1:4],iris[,5])，注意第5列是品种，取作因变量y
+ld  #输出判别结果：包括公式、先验概率、均值向量，性判别函数的系数、贡献率大小等
+Z=predict(ld)  #用内置函数predict( )对原始数据进行回判分类
+newG=Z$class  #单独列出回判分类
+cbind(Species, newG, Z$x) #对比原始数据分类、回判分类结果和Z中两个判别函数相应的值
+tab=table(newG, Species)  #列表比较
+tab  #显示列表比较结果
+
+#例5.3  气象数据的Bayes判别分析
+#打开数据文件eg5.3.xls,选取E2:G16区域,然后复制
+d5.3=read.table("clipboard",header=T) #将eg5.3.xls数据读入到d5.3中
+attach(d5.3)  #把数据变量的名字读入内存，这样能通过列名直接使用各列数据
+library(MASS)  #加载MASS程序包
+ld=lda(G~x1+x2, prior=c(6,8)/14)  #用先验概率进行线性判别
+ld  #输出判别结果
+Z=predict(ld)  #用函数predict( )对原始数据进行回判分类
+newG=Z$class  #单独列出回判分类
+cbind(G, newG, Z$x)  #对比原始数据分类、回判分类结果和判别函数的值
+tab=table(G, newG)  #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率
+Z$post  #计算后验概率
+

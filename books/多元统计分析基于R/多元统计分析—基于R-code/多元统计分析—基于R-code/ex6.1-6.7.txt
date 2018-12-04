@@ -1,0 +1,115 @@
+#习题6.1  某地六个工业行业经济效益指标的主成分分析
+#打开数据文件ex6.1.xls,选取A1:E7区域,然后复制
+ex6.1<-read.table("clipboard",header=T) #将数据读入R
+ex6.1 #显示数据
+R=round(cor(ex6.1), 3) #求样本相关系数矩阵, 保留三位小数
+R
+PCA6.1=princomp(ex6.2, cor=T)#用样本相关系数阵做主成分分析
+PCA6.1
+summary(PCA6.1, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.1),3)  #作预测, 保留三位小数
+screeplot (PCA6.1, type="lines") # 画碎石图，用直线图类型
+PCA6.1$scores # 计算主成分得分
+load=loadings(PCA6.1) #提取主成分载荷矩阵
+plot(load[,1:2]) #用载荷矩阵前两列作散点图
+text(load[,1], load[,2], adj=c(0.5, -0.5)) #为散点标号
+abline(h=0);  abline(v=0) #划分象限
+round(PCA6.1$scores,3) #计算主成分得分，保留三位小数
+
+#习题6.2  某市15个企业7个经济指标的主成分分析
+#打开数据文件ex6.2.xls,选取A1:H16区域,然后复制
+ex6.2<-read.table("clipboard",header=T) #将数据读入R
+ex6.2 #显示数据
+R=round(cor(ex6.2), 3) #求样本相关系数矩阵, 保留三位小数
+PCA6.2=princomp(ex6.2, cor=T)#用样本相关系数阵做主成分分析
+PCA6.2
+summary(PCA6.2, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.2),3)  #作预测, 保留三位小数
+screeplot (PCA6.2, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.2) #提取主成分载荷矩阵
+plot(load[,1:2], xlim=c(-0.6,0.6), ylim=c(-0.6,0.6)) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.2)) #为散点标号
+abline(h=0);  abline(v=0) #划分象限
+round(PCA6.2$scores,3) #计算主成分得分，保留三位小数
+
+
+#习题6.3  全国28省市19-22岁男生形体指标的主成分分析
+#打开数据文件ex6.3.xls,选取C1:H29区域,然后复制
+ex6.3<-read.table("clipboard",header=T) #将数据读入R
+ex6.3 #显示数据
+R=round(cor(ex6.3), 3) #求样本相关系数矩阵, 保留三位小数
+R
+PCA6.3=princomp(ex6.3, cor=T)#用样本相关系数阵做主成分分析
+PCA6.3
+summary(PCA6.3, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.3),3)  #作预测, 保留三位小数
+screeplot (PCA6.3, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.3) #提取主成分载荷矩阵
+plot(load[,1:2]) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.2)) #为散点标号
+abline(h=0);  abline(v=0) #划分象限
+PCA6.3$scores # 计算主成分得分，或者：
+round(PCA6.3$scores,3) #计算主成分得分，保留三位小数
+
+#习题6.4  128名男子形体指标的主成分分析
+#打开数据文件ex6.4.xls,选取B2:Q17区域(只选数据),然后复制
+R6.4<-read.table("clipboard") #将数据读入R
+R6.4=as.matrix(R6.4) #转换成矩阵形式
+PCA6.4=princomp(covmat=R6.4)#直接用R6.4做主成分分析
+PCA6.4
+summary(PCA6.4, loadings=T) #列出主成分分析分析结果
+screeplot (PCA6.4, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.4) #提取主成分载荷矩阵
+plot(load[,1:2]) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.2)) #为散点标号
+abline(h=0);  abline(v=-0.2) #数据分块
+
+
+#习题6.5   某地农业生态经济系统相关指标的主成分分析
+#打开数据文件ex6.5.xls,选取A1:J22区域,然后复制
+ex6.5<-read.table("clipboard",header=T) #将数据读入R
+ex6.5 #显示数据
+R=round(cor(ex6.5), 3);R #求样本相关系数矩阵, 保留三位小数
+PCA6.5=princomp(ex6.5, cor=T)#用样本相关系数阵做主成分分析
+summary(PCA6.5, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.5),3)  #作预测, 保留三位小数
+screeplot (PCA6.5, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.5) #提取主成分载荷矩阵
+plot(load[,1:2]) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.5)) #为散点标号
+abline(h=0); abline(v=0)
+round(PCA6.5$scores,3) #计算主成分得分，保留三位小数
+
+
+#习题6.6   2000-2010年中国城市污染物释放数据主成分分析
+#打开数据文件ex6.6.xls,选取A1:G12区域,然后复制
+ex6.6<-read.table("clipboard",header=T) #将数据读入R
+ex6.6 #显示数据
+R=round(cor(ex6.6), 3); R  #求样本相关系数矩阵, 保留三位小数
+PCA6.6=princomp(ex6.6, cor=T)#用样本相关系数阵做主成分分析
+summary(PCA6.6, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.6),3)  #作预测, 保留三位小数
+screeplot (PCA6.6, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.6) #提取主成分载荷矩阵
+plot(load[,1:2]) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.5)) #为散点标号
+abline(h=0); abline(v=0)
+round(PCA6.6$scores,3) #计算主成分得分，保留三位小数
+
+
+#习题6.7  2010年我国城镇居民人均年消费的主成分分析
+#打开数据文件ex6.7.xls,选取A1:I32区域,然后复制
+ex6.7<-read.table("clipboard",header=T) #将数据读入R
+ex6.7 #显示数据
+R=round(cor(ex6.7), 3);R #求样本相关系数矩阵, 保留三位小数
+PCA6.7=princomp(ex6.7, cor=T)#用样本相关系数阵做主成分分析
+summary(PCA6.7, loadings=T) #列出主成分分析分析结果
+round(predict(PCA6.7),3)  #作预测, 保留三位小数
+screeplot (PCA6.7, type="lines") # 画碎石图，用直线图类型
+load=loadings(PCA6.7) #提取主成分载荷矩阵
+plot(load[,1:2]) #作散点图
+text(load[,1], load[,2], adj=c(-0.5, 0.5)) #为散点标号
+abline(h=0)
+round(PCA6.7$scores,3) #计算主成分得分，保留三位小数
+
+

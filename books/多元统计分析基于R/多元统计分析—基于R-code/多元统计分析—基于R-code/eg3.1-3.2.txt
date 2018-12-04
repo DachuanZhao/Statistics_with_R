@@ -1,0 +1,17 @@
+#例3.1
+#eg3.1广义线性模型:logistic模型
+#打开数据文件eg3.1.xls,选取A1:B46区域,然后复制
+data3.1<-read.table("clipboard",header=T) #将eg3.1.xls数据读入到data3.1中
+glm.logit<-glm(y~x,family=binomial,data=data3.1)  #建立y关于x的logistic回#归模型,数据为data3.1
+summary(glm.logit)  #模型汇总,给出模型回归系数的估计和显著性检验等
+yp<-predict(glm.logit,data.frame(x=15)) 
+p.fit<-exp(yp)/(1+exp(yp));p.fit  #估计x=15时y=1的概率
+
+#例3.2
+#eg3.2 广义线性模型: 泊松对数线性模型
+#打开数据文件eg3.2.xls,选取A1:E60区域,然后复制
+data3.2<-read.table("clipboard",header=T) #将eg3.2.xls数据读入到data3.2中
+glm.ln<-glm(y~x1+x2+x3,family=poisson(link=log),data=data3.2)  #建立y关于
+#x1,x2,x3的泊松对数线性模型
+summary(glm.ln)  #模型汇总,给出模型回归系数的估计和显著性检验等
+exp(coef(glm.ln)) #指数化系数

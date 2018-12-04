@@ -1,0 +1,11 @@
+paste('实践13(高维数组)')
+x=array(runif(24),c(4,3,2))
+is.matrix(x)
+dim(x)
+is.matrix(x[1,,])
+x=array(1:24,c(4,3,2))
+x[c(1,3),,]
+x=array(1:24,c(4,3,2))
+apply(x,1,mean)
+apply(x,1:2,sum)
+apply(x,c(1,3),prod)

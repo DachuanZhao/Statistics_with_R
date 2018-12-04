@@ -1,0 +1,87 @@
+#习题5.2  判别明天是雨天还是晴天(Fisher判别)
+#打开数据文件ex5.2.xls,选取A1:C21区域,然后复制
+ex5.2=read.table("clipboard", header = T) #读入数据为ex5.2
+ex5.2 #显示数据
+attach(ex5.2) #把数据变量的名字放入内存，这样能通过列名直接使用各列数据
+library(MASS)
+ld=lda(G~x1+x2) #进行Fisher判别
+ld #输出判别结果
+Z=predict(ld) #对原始数据进行回判分类
+newG=Z$class
+cbind(G,newG,Z$x) #对比原始分类和回判分类，给出判别函数值
+tab=table(G,newG) #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率
+Z$post  #计算后验概率
+newdata=data.frame(x1=8.1,x2=2.0)
+predict(ld,newdata) #$class的输出值为1，应预报明天为雨天
+
+#习题5.3  判别产品级别(Fisher判别和Bayes判别)
+# (1)  Fisher判别法：
+#打开数据文件ex5.3.xls,选取B1:E15区域,然后复制
+ex5.3=read.table("clipboard", header = T) #读入数据为ex5.3
+ex5.3 #显示数据
+attach(ex5.3)
+library(MASS)
+ld=lda(ex5.3[,1:3],ex5.3[,4]) #第4列是级别，取作因变量
+ld #输出判别结果
+Z=predict(ld) #对原始数据进行回判分类
+newG=Z$class
+cbind(ex5.3[,4],newG,Z$x) #对比原始分类和回判分类，给出判别函数值
+tab=table(newG,ex5.3[,4]) #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率
+Z$post  #计算后验概率
+#  (2)  Bayes判别法：
+# 同(1)中Fisher判别法程序，只要把"ld=lda(ex5.3[,1:3],ex5.3[,4])"
+# 改为"ld=lda(ex5.3[,1:3],ex5.3[,4],prior=c(5,4,5)/14)"即可
+# 结果与Fisher判别法一致，因为二者的先验概率均为c(5,4,5)/14)
+
+#习题5.4  砂基液化类别判定(二分类距离判别)
+#打开数据文件ex5.4.xls,选取B1:I36区域,然后复制
+ex5.4=read.table("clipboard", header=T)  #将已复制到剪贴板中的数据读入R
+attach(ex5.4)   
+classG1= ex5.4 [1:12,2:8]   #选取训练样本1
+classG2= ex5.4 [13:35,2:8]  #选取训练样本2
+source("DDA2.R")     #载入自编程序DDA2.R，设它已经放在当前工作目录下
+DDA2(classG1, classG2, var.equal=TRUE) 
+#当假设两总体样本协方差阵相同时，执行程序DDA2.R，发现第9,28,29号样本判错
+DDA2(classG1,classG2)      #执行程序DDA2.R
+#当两总体样本协方差阵不相同时，执行程序DDA2.R，发现只有第9号样本判错
+
+#习题5.5  个人信用等级评价(Fisher判别)
+#打开数据文件ex5.5.xls,选取B1:J18区域,然后复制
+ex5.5=read.table("clipboard", header = T) #读入数据为ex5.5
+ex5.5 #显示数据
+attach(ex5.5)
+library(MASS)
+ld=lda(ex5.5[,1:8],ex5.5[,9]) #进行Fisher判别
+ld #输出判别结果
+Z=predict(ld) #对原始数据进行回判分类
+newG=Z$class
+cbind(G,newG,Z$x) #对比原始分类和回判分类，给出判别函数值,只有12号样品判错(4判为5)
+tab=table(G,newG) #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率：0.9411765
+Z$post  #计算后验概率
+newdata=c(2500, 1500, 0, 3, 2, 3, 4, 1)
+predict(ld,newdata) #$class的输出值为1，应判别该用户的信用级别为1
+
+#习题5.6  中小型企业破产类型判别(Bayes判别)
+#打开数据文件ex5.6.xls,选取B1:F39区域,然后复制
+ex5.6=read.table("clipboard", header = T) #读入数据
+ex5.6 #显示数据
+attach(ex5.6)
+library(MASS)
+ld=lda(ex5.6[,1:4],ex5.6[,5],prior=c(17,21)/38) #第5列是级别，取作因变量
+ld #输出判别结果
+Z=predict(ld) #对原始数据进行回判分类
+newG=Z$class
+cbind(ex5.6[,5],newG,Z$x) #对比原始分类和回判分类，给出判别函数值
+tab=table(newG,ex5.6[,5]) #列表比较
+tab  #显示列表比较结果
+sum(diag(prop.table(tab)))  #计算回判正确率： 0.8684211
+Z$post  #计算后验概率
+#打开数据文件ex5.6.xls,选取B40:E47区域,然后复制
+newdata=read.table("clipboard") #读取待测样本用于下面判别
+predict(ld, newdata= newdata) #前4个待测样本判为第1类，后4个判为第2类

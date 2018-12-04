@@ -1,0 +1,12 @@
+paste('实践4(包括简单自变量为定量变量及定性变量的回归)')
+ncol(cars)
+nrow(cars)
+lm(dist~speed,data=cars)
+cars$qspeed = cut(cars$speed,breaks=quantile(cars$speed),inculde.lowest = T)
+names(cars)
+cars[3]
+is.factor(cars$qspeed)
+plot(dist~qspeed,data = cars)
+(a=lm(dist ~ qspeed,data = cars))
+summary(a)
+paste('实践4结束') 

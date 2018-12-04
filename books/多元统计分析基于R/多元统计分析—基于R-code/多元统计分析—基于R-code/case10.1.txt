@@ -1,0 +1,14 @@
+# 案例10.1 我国2010年农村人均生活消费支出的多维标度分析
+# case10.1打开数据文件case10.1.xls，选取A2:I33区域，然后复制
+case10.1<-read.table("clipboard", header=T) #将数据读入R
+D1=as.matrix(case10.1) #需要将数据转换成矩阵形式
+D=dist(D1) #求距离阵
+library(MASS) #载入MASS包, 这样才能使用isoMDS函数
+fit=isoMDS(D, k=2)
+fit
+x=fit$points[,1]
+y=fit$points[,2]
+plot(x, y) #画散点图
+text(x, y, labels=row.names(case10.1), adj=c(0.5,1.5), cex=0.7)  
+#设置标签位置大小
+abline(h=0, v=0, lty=3)  #采用虚线划分四个象限

@@ -1,0 +1,36 @@
+#ex4.1 系统聚类
+#打开数据文件ex4.1.xls,选取A1:E21区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex4.1.xls数据读入到dat中
+d<-dist(dat,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+HC<-hclust(d,method="ward") #采用Ward法（ward）聚类
+plot(HC) #绘制聚类树状图
+
+#ex4.2 系统聚类
+#打开数据文件ex4.2.xls,选取A1:E17区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex4.2.xls数据读入到dat中
+d<-dist(dat,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+HC<-hclust(d,method="centroid") #采用重心法（centroid）聚类
+plot(HC) #绘制聚类树状图
+
+#ex4.3 系统聚类
+#打开数据文件ex4.3.xls,选取A2:F33区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex4.3.xls数据读入到dat中
+d<-dist(dat,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+HC<-hclust(d,method="ward") #采用Ward法（ward）聚类
+plot(HC) #绘制聚类树状图
+
+#ex4.4 系统聚类
+#打开数据文件ex4.4.xls,选取A2:I33区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex4.4.xls数据读入到dat中
+d<-dist(dat,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+HC<-hclust(d,method="ward") #采用Ward法（ward）聚类
+plot(HC) #绘制聚类树状图
+
+#ex4.5 系统聚类
+#打开数据文件ex4.5.xls,选取A1:I31区域,然后复制
+dat<-read.table("clipboard",header=T) #将ex4.5.xls数据读入到dat中
+d<-dist(dat,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+HC<-hclust(d,method="ward") #采用Ward法（ward）聚类
+plot(HC) #绘制聚类树状图
+
+#注：以上习题也可以采用k均值聚类法进行聚类

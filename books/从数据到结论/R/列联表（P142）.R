@@ -1,0 +1,10 @@
+setwd('C:/Users/hnjyzdc/Desktop/R/从数据到结论')
+w=read.table('HEcolor.txt',header=T)
+ftable(xtabs(Freq~.,w),row.vars = 1,col.var=2:3)
+xtabs(Freq~Hair+Eye,w)
+chisq.test(xtabs(Freq~Hair+Eye,w))
+
+m=read.table('acc2.txt',header = T)
+m$Machine=factor(m$Machine);m$Person=factor(m$Person)
+a=glm(Incidents~Time+Machine+Person,family = 'poisson',data=m)
+summary(a)

@@ -1,0 +1,25 @@
+# 例10.3打开数据文件eg10.3.xls，选取数据区域C2:K10，然后复制
+eg10.3=read.table("clipboard", header=T) #在R中读入数据
+eg10.3  #显示数据
+D10.3=cmdscale(eg10.3, k=2, eig=T)  # k取为2，求前两个特征向量和特征值
+D10.3
+sum(abs(D10.3$eig[1:2]))/sum(abs(D10.3$eig))  #计算a1.2: 0.9221257
+sum((D10.3$eig[1:2])^2)/sum((D10.3$eig)^2)  #计算a2.2: 0.9971656
+x=D10.3$points[, 1]
+y=D10.3$points[, 2]
+plot(x, y, xlim=c(-700, 800),ylim=c(-300, 600))  #根据两个特征向量的分量大小绘散点图
+text(x, y, labels=row.names(eg10.3), adj=c(0, -0.5), cex=0.8) #将拟合点用行名标出
+
+
+# 例10.4打开数据文件eg10.4.xls，选取数据区域A10:G16，然后复制
+eg10.4=read.table("clipboard", header=T)  #在R中读入数据
+D10.4=cmdscale(eg10.4, k=2, eig=T)  # k取为2，求前两个特征向量和特征值
+D10.4
+sum(abs(D10.4$eig[1:2]))/sum(abs(D10.4$eig))  #计算a1.2： 0.5368268 
+sum((D10.4$eig[1:2])^2)/sum((D10.4$eig)^2)  #计算a2.2： 0.6805523  
+x=D10.4$points[, 1]
+y=D10.4$points[, 2]
+plot(x, y, xlim=c(-0.6, 0.8),ylim=c(-0.6,0.7))  #根据两个特征向量的分量大小绘拟合图
+text(x, y, labels=row.names(eg10.4), adj=c(0, -1), cex=0.8) #将拟合点用行名标出
+
+

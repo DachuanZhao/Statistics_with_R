@@ -1,0 +1,40 @@
+#例2.1
+#eg2.1回归分析
+#打开数据文件eg2.1.xls,选取A1:F37区域,然后复制
+data2.1<-read.table("clipboard",header=T) #将eg2.1.xls数据读入到data2.1中
+lm.salary<-lm(y~x1+x2+x3+x4,data=data2.1)  #建立y关于x1、x2、x3和x4的线性
+#回归方程,数据为data2.1
+summary(lm.salary)   #模型汇总,给出模型回归系数的估计和显著性检验等
+#例2.1（续）
+#假设eg2.1.xls中的数据已经读入到data2.1中,
+lm.salary<-lm(y~x1+x2+x3+x4,data=data2.1) #建立全变量回归方程
+lm.step<-step(lm.salary,direction="both") #用“一切子集回归法”来进行逐步回归
+
+#例2.2
+#假设由例2.1已经得到逐步回归模型lm.step
+y.res<-residuals (lm.salary)  #计算回归模型lm.salary的普通残差
+y.rst<-rstandard(lm.step)  #计算回归模型lm.step的标准化残差
+print(y.rst)  #输出回归模型lm.step的标准化残差y.rst
+y.fit<-predict(lm.step)  #计算回归模型lm.step的预测值
+plot(y.res~ y.fit)  #绘制以普通残差为纵坐标,预测值为横坐标的残差散点图
+plot(y.rst~ y.fit)  #绘制以标准化残差为纵坐标,预测值为横坐标的残差散点图
+
+#例2.3
+#假设由例2.1已经得到逐步回归模型lm.step
+lm.step_new<-update(lm.step,log(.)~.)  #对模型进行对数变换
+y.rst<-rstandard(lm.step_new)  #计算新回归模型lm.step_new的标准化残差
+y.fit<-predict(lm.step_new)  #计算回归模型lm.step_new的预测值
+plot(y.rst~ y.fit)  #绘制以标准化残差为纵坐标,预测值为横坐标的残差散点图
+
+#例2.4
+#假定由例2.3已经获得模型lm.step_new
+par(mfrow=c(2,2))  #在一个2×2网格中创建4个绘图区
+plot(lm.step_new)  #绘制模型诊断图
+influence.measures(lm.step_new)  #计算各个观测值的诊断统计量
+#例2.5
+#假定由例2.1已经获得模型lm.step
+preds<-data.frame(x1=20000,x4=20)  #给定解释变量x1和x4的值
+predict(lm.step,newdata=preds,interval="prediction",level=0.95)#点预测和区间预测
+
+
+

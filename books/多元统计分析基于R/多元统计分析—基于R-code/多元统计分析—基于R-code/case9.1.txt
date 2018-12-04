@@ -1,0 +1,39 @@
+#案例9.1
+#打开数据文件case9.1.xls,选取B1:H11区域,然后复制
+X<-read.table("clipboard",header=T) #将case9.1.xls数据读入到X中
+R=cor(X);R #计算相关系数矩阵
+A=solve(R[1:4,1:4])%*%R[1:4,5:7]%*%solve(R[5:7,5:7])%*%R[5:7,1:4]
+ev=eigen(A)$values;ev #求A的特征值
+sqrt(ev) #求典型相关系数
+xy=scale(X) #数据标准化
+ca=cancor(xy[,1:4],xy[,5:7]) #典型相关分析
+ca$cor #显示典型相关系数
+ca$xcoef #显示x的典型载荷
+ca$ycoef #显示y的典型载荷
+ca$xcenter #显示x的样本均值
+ca$ycenter #显示y的样本均值
+u<-as.matrix(xy[,1:4])%*%ca$xcoef #计算得分
+v<-as.matrix(xy[,5:7])%*%ca$ycoef #计算得分
+corcoef.test<-function(r,n,p,q,alpha=0.05){
+  m<-length(r);Q<-rep(0,m);lambda<-1
+  for (k in m:1){
+    lambda<-lambda*(1-r[k]^2);
+    Q[k]<- -log(lambda)
+      }
+  s<-0;i<-m
+  for (k in 1:m){
+    Q[k]<-(n-k+1-1/2*(p+q+3)+s)*Q[k]
+    chi<-1-pchisq(Q[k],(p-k+1)*(q-k+1))
+    if (chi>alpha){
+      i<-k-1;break
+    }
+    s<-s+1/r[k]^2
+  }
+  i
+}
+corcoef.test(r=ca$cor,n=10,p=4,q=3) #相关系数检验(置信水平取0.05)
+par(mfrow=c(1,2)) #将画片横向分成两块
+plot(u[,1],v[,1],xlab="u1",ylab="v1") #绘制第一对典型变量得分的散点图，x轴名称为u1,y轴名称为v1
+abline(0,1) #在散点图上添加一条y等于x的线，以看散点分布情况
+plot(u[,2],v[,2],xlab="u2",ylab="v2") #绘制第二对典型变量得分的散点图，x轴名称为u2,y轴名称为v2
+abline(0,1) #在散点图上添加一条y等于x的线，以看散点分布情况

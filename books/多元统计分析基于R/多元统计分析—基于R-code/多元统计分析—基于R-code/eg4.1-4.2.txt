@@ -1,0 +1,20 @@
+#eg4.1 系统聚类
+#假定数据存储目录为：c:/data/
+data4.1<-read.table("c:/data/eg4.1.txt",header=T) #将eg4.1.txt数据读入到data4.1中
+d<-dist(data4.1,method="euclidean",diag=T,upper=F,p=2) #采用欧氏距离计算相似矩阵d
+#method为距离计算方法,包括"euclidean"（欧氏距离）, "manhattan"（绝对距离）,
+#"maximum"（切氏距离）, "minkowski"（明氏距离）, "canberra"（兰氏距离）等;
+#diag为是否包括对角元素,upper为是否需要上三角元素
+HC<-hclust(d,method="single") #采用最小距离法（single）聚类
+#method为系统聚类方法,包括"single"（最小距离法）,"complete"（最大距离法）,"average"
+#（类平均法）,"median"（中间距离法）,"centroid"（重心法）,"ward"（Ward法）等
+plot(HC) #绘制聚类树状图
+
+#eg4.2 系统聚类: k均值聚类
+#打开数据文件eg4.2.xls,选取A1:I32区域,然后复制
+data4.2<-read.table("clipboard",header=T) #将eg4.2.xls数据读入到data4.2中
+KM<-kmeans(data4.2,4,nstart=20,algorithm="Hartigan-Wong") #聚类的个数为4, 随机集合#的个数为20, 算法为"Hartigan-Wong", 其他备选算法为"Lloyd","Forgy", "MacQueen" 
+sort(KM$cluster) #对分类结果进行排序并查看分类情况
+
+
+

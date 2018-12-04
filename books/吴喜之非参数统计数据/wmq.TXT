@@ -1,0 +1,24 @@
+Count Capacity Area Location
+43 L S U
+51 M S U
+67 S S U
+45 L N U
+39 M N U
+54 S N U
+51 L S R
+35 M S R
+32 S S R
+66 L N R
+32 M N R
+30 S N R
+
+
+
+
+
+
+
+
+
+
+

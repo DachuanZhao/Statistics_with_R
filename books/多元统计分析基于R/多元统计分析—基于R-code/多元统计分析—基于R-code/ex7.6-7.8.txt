@@ -1,0 +1,49 @@
+#习题7.6 全国28省市19-22岁男生形体指标的因子分析
+#打开数据文件ex6.3.xls,选取D2:I30区域,然后复制
+X<-read.table("clipboard",header=T) #将数据读入R
+X #显示数据
+cor(X) #计算样本数据的相关系数矩阵
+factanal(X,factors=2,rotation="none") #极大似然法做因子分析
+#下面用主成分法做因子分析,采用了《多元统计分析及R语言建模》（王斌会编著，暨南大学出版社，2011年）
+#中的软件包mvstats进行分析，该包可以到王斌会的网站http://202.116.0.146/Rstat/mvstats.rar上下载.
+library(mvstats) #加载mvstats包
+fac=factpc(X,2) #主成分法做因子分析
+fac
+fac1=factpc(X,2,rotation="varimax")  #用主成分法采用方差最大化作因子正交旋转
+fac1
+fac2=factpc(X,2,rotation="varimax",scores="regression")  #利用回归估计计算因子得分
+fac2$scores #输出因子得分情况
+plot(fac2$loadings,xlab="Factor1",ylab="Factor2")  #输出因子载荷图
+biplot(fac2$scores,fac2$loadings)  #画出各个省市男生的因子得分图和原坐标在因子的方向，全面反映了因子与原始数据的关系
+
+#习题7.7   2000-2010年中国城市污染物释放数据因子分析
+#打开数据文件ex6.6.xls,选取A1:G12区域,然后复制
+X<-read.table("clipboard",header=T) #将数据读入R
+X #显示数据
+cor(X) #计算样本数据的相关系数矩阵
+factanal(X,factors=2,rotation="none") #极大似然法做因子分析
+library(mvstats) #加载mvstats包
+fac=factpc(X,2) #主成分法做因子分析
+fac
+fac1=factpc(X,2,rotation="varimax")  #用主成分法采用方差最大化作因子正交旋转
+fac1
+fac2=factpc(X,2,rotation="varimax",scores="regression")  #利用回归估计计算因子得分
+fac2$scores #输出因子得分情况
+plot(fac2$loadings,xlab="Factor1",ylab="Factor2")  #输出因子载荷图
+biplot(fac2$scores,fac2$loadings)  #画出城市污染物的因子得分图和原坐标在因子的方向，全面反映了因子与原始数据的关系
+
+#习题7.8   2010年我国城镇居民人均年消费的因子分析
+#打开数据文件ex6.7.xls,选取A1:I32区域,然后复制
+X<-read.table("clipboard",header=T) #将数据读入R
+X #显示数据
+cor(X) #计算样本数据的相关系数矩阵
+factanal(X,factors=2,rotation="none") #极大似然法做因子分析
+library(mvstats) #加载mvstats包
+fac=factpc(X,2) #主成分法做因子分析
+fac
+fac1=factpc(X,2,rotation="varimax")  #用主成分法采用方差最大化作因子正交旋转
+fac1
+fac2=factpc(X,2,rotation="varimax",scores="regression")  #利用回归估计计算因子得分
+fac2$scores #输出因子得分情况
+plot(fac2$loadings,xlab="Factor1",ylab="Factor2")  #输出因子载荷图
+biplot(fac2$scores,fac2$loadings)  #画出各地区城镇居民家庭人均年消费的因子得分图和原坐标在因子的方向，全面反映了因子与原始数据的关系

@@ -1,0 +1,9 @@
+plot(1,1,xlim=c(1,7.5),ylim=c(0,5),type='n')#画出框架
+#在plot命令后追加点
+points(1:7,rep(4.5,7),cex=seq(1,4,l=7),col=1:7,pch=0:6)
+text(1:7,rep(3.5,7),labels=paste(0:6,letters[1:7]),cex=seq(1,4,l=7),col=1:7)
+#在指定位置加文字
+points(1:7,rep(2,7),pch=(0:6)+7)#点出符号7到13
+text((1:7)+0.25,rep(2,7),paste((0:6)+7))#加符号号码
+points(1:7,rep(1:7),pch=(0:6)+14)#点出符号14到20
+text((1:7)+0.25,rep(1,7),paste((0:6)+14))#加符号号码

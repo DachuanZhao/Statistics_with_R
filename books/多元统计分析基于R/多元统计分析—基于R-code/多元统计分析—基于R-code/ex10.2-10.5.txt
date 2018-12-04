@@ -1,0 +1,62 @@
+#习题10.2 打开数据文件ex10.2.xls，选取数据区域A2:G23，然后复制
+ex10.2=read.table("clipboard",  header=T) #在R中读入数据
+ex10.2  #显示数据
+D1=as.matrix(ex10.2) #需要将数据转换成矩阵形式
+D=dist(D1) #求距离阵
+library(MASS) #载入MASS包, 这样才能使用isoMDS函数
+fit=isoMDS(D, k=2)
+fit
+x=fit$points[,1]
+y=fit$points[,2]
+plot(x, y) #画散点图
+text(x, y, labels=row.names(ex10.2), adj=c(0, -0.5), cex=0.7) 
+#设置标签位置大小并将拟合点用行名标出
+abline(h=0, v=0, lty=3)  #采用虚线划分四个象限
+
+
+#习题10.3 打开数据文件ex10.3.xls，选取数据区域A1:I32，然后复制
+ex10.3=read.table("clipboard",  header=T) #在R中读入数据
+ex10.3  #显示数据
+D1=as.matrix(ex10.3) #需要将数据转换成矩阵形式
+D=dist(D1) #求距离阵
+library(MASS) #载入MASS包, 这样才能使用isoMDS函数
+fit=isoMDS(D, k=2)
+fit
+x=fit$points[,1]
+y=fit$points[,2]
+plot(x, y) #画散点图
+text(x, y, labels=row.names(ex10.3), adj=c(0, -0.5), cex=0.7) 
+#设置标签位置大小并将拟合点用行名标出
+abline(h=0, v=0, lty=3)  #采用虚线划分四个象限
+
+
+#习题10.4 打开数据文件ex10.4.xls，选取数据区域B2:N14，然后复制
+ex10.4=read.table("clipboard",  header=T) #在R中读入数据
+ex10.4  #显示数据
+D=as.matrix(ex10.4) #需要将数据转换成矩阵形式
+library(MASS) #载入MASS包, 这样才能使用isoMDS函数
+fit=isoMDS(D, k=2)
+fit
+x=fit$points[,1]
+y=fit$points[,2]
+plot(x, y) #画散点图
+text(x, y, labels=row.names(ex10.4), adj=c(0, -0.5), cex=0.7) 
+#设置标签位置大小并将拟合点用行名标出
+abline(h=0, v=0, lty=3)  #采用虚线划分四个象限
+
+#习题10.5 打开数据文件ex10.5.xls，选取数据区域B2:K22，然后复制
+ex10.5=read.table("clipboard",  header=T) #在R中读入数据
+ex10.5  #显示数据
+D1=as.matrix(ex10.5) #需要将数据转换成矩阵形式
+D=dist(D1) #求距离阵
+library(MASS) #载入MASS包, 这样才能使用isoMDS函数
+fit=isoMDS(D, k=2)
+fit
+x=fit$points[,1]
+y=fit$points[,2]
+plot(x, y) #画散点图
+text(x, y, labels=row.names(ex10.5), adj=c(0, -0.5), cex=0.7) 
+#设置标签位置大小并将拟合点用行名标出
+abline(h=0, v=0, lty=3)  #采用虚线划分四个象限
+
+

@@ -1,0 +1,20 @@
+setwd('C:/Users/hnjyzdc/Desktop/R/从数据到结论')
+w=read.table('Dermatology1.txt',header = T);w[,35]=factor(w[,35])
+library(rpart.plot)
+(a=rpart(formula=V35~.,data=w))
+rpart.plot(a,type=1,extra=1)
+table(w[,35],predict(a,w,type = 'class'))
+
+w=read.table('agaricus-lepiota1.txt',header = T)
+library(rpart.plot)
+(a=rpart(V1~.,w))
+rpart.plot(a,type=1,extra=1)
+(z0=table(w[,1],predict(a,w,type='class')))
+z0;(E0=(sum(z0)-sum(diag(z0)))/sum(z0))
+
+w=read.table('housing.txt',header=T)
+library(rpart.plot)
+a=rpart(MEDV~.,w);a
+rpart.plot(a,type=1,faclen=T)
+y0=predict(a,w)
+(NMSE0=mean((w$MEDV-y0)^2)/mean((w$MEDV-mean(w$MEDV))^2))
